@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"fmt"
 	"os"
 	"runtime"
 
@@ -82,10 +83,10 @@ func Panicf(format string, args ...interface{}) {
 	log.Panicf(format, args...)
 }
 
-func LogFunction() {
+func GetCurrentLog() string {
 	pc := make([]uintptr, 10)
 	runtime.Callers(2, pc)
 	f := runtime.FuncForPC(pc[0])
 	_, line := f.FileLine(pc[0])
-	log.Tracef("Invoke at %s.%d", f.Name(), line)
+	return fmt.Sprintf("%s.%d", f.Name(), line)
 }
