@@ -12,10 +12,6 @@ var (
 	Comment   = '#'
 )
 
-type Wallet interface {
-	getData() ([]string, [][]string)
-}
-
 type WalletCSV struct {
 	header  []string
 	records [][]string
@@ -48,16 +44,16 @@ func getData(reader *csv.Reader) ([]string, [][]string) {
 	log.Trace(log.GetCurrentLog())
 
 	header, err := reader.Read()
+	log.Debugf("Header: %v", header)
 	if err != nil {
 		log.Fatal(err)
 	}
 	records, err := reader.ReadAll()
+	log.Debugf("Records: %s", records)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	log.Debugf("Header: %v", header)
-	log.Debugf("Records: %s", records)
 	log.Trace(log.GetEndCurrentLog())
 	return header, records
 }
@@ -69,10 +65,7 @@ func New(fileName string) *WalletCSV {
 
 	file := getFile(fileName)
 	reader := getReader(file)
-	header, records := getData(reader)
-
-	wallet.header = header
-	wallet.records = records
+	wallet.header, wallet.records = getData(reader)
 
 	log.Trace(log.GetEndCurrentLog())
 	return &wallet
