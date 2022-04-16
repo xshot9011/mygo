@@ -17,7 +17,7 @@ func init() {
 	log.SetOutput(os.Stdout)
 
 	customFormatter := new(logrus.TextFormatter)
-	customFormatter.TimestampFormat = "2006-01-02T15:04:05+0000"
+	customFormatter.TimestampFormat = "2006-01-02T15:04:05.000000+0000"
 	customFormatter.FullTimestamp = true
 
 	logLevel, err := logrus.ParseLevel(os.Getenv("LOG_LEVEL"))
@@ -88,5 +88,13 @@ func GetCurrentLog() string {
 	runtime.Callers(2, pc)
 	f := runtime.FuncForPC(pc[0])
 	_, line := f.FileLine(pc[0])
-	return fmt.Sprintf("%s.%d", f.Name(), line)
+	return fmt.Sprintf("Invoke at %s.%d", f.Name(), line)
+}
+
+func GetEndCurrentLog() string {
+	pc := make([]uintptr, 10)
+	runtime.Callers(2, pc)
+	f := runtime.FuncForPC(pc[0])
+	_, line := f.FileLine(pc[0])
+	return fmt.Sprintf("Finish at %s.%d", f.Name(), line)
 }

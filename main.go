@@ -1,21 +1,22 @@
 package main
 
 import (
-	"github.com/sirupsen/logrus"
-	"github.com/xshot9011/mygo/logger"
+	log "github.com/xshot9011/mygo/logger"
+	"github.com/xshot9011/mygo/wallet"
 )
 
-var log *logrus.Logger
+var (
+	fileName string = "./user.csv"
+)
 
 func init() {
-	log = logger.NewLogConfiguration()
 }
 
 func main() {
-	log.Trace(logger.Trace())
-	caller()
-}
+	log.Trace(log.GetCurrentLog())
 
-func caller() {
-	log.Trace(logger.Trace())
+	wallet := wallet.New(fileName)
+	log.Debugf("Get wallet: %v", wallet)
+
+	log.Trace(log.GetEndCurrentLog())
 }
