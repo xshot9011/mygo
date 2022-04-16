@@ -24,11 +24,11 @@ func NewLogConfiguration() *logrus.Logger {
 	log.SetLevel(logLevel)
 
 	// The log level is the hierarchy.
-	log.Trace("Successfully initial log Trace")
-	log.Debug("Successfully initial log Debug")
-	log.Info("Successfully initial log Info")
-	log.Warn("Successfully initial log Warn")
-	log.Error("Successfully initial log Error")
+	// log.Trace("Successfully initial log Trace")
+	// log.Debug("Successfully initial log Debug")
+	// log.Info("Successfully initial log Info")
+	// log.Warn("Successfully initial log Warn")
+	// log.Error("Successfully initial log Error")
 	// log.Fatal("Bye.")         // Calls os.Exit(1) after logging
 	// log.Panic("I'm bailing.") // Calls panic() after logging
 	return log
