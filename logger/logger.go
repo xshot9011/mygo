@@ -1,7 +1,6 @@
 package logger
 
 import (
-	"fmt"
 	"os"
 	"runtime"
 
@@ -37,10 +36,59 @@ func init() {
 	// log.Panic("I'm bailing.") // Calls panic() after logging
 }
 
-func Trace() string {
+func Trace(args ...interface{}) {
+	log.Trace(args...)
+}
+func Tracef(format string, args ...interface{}) {
+	log.Tracef(format, args...)
+}
+
+func Debug(args ...interface{}) {
+	log.Debug(args...)
+}
+func Debugf(format string, args ...interface{}) {
+	log.Debugf(format, args...)
+}
+
+func Info(args ...interface{}) {
+	log.Info(args...)
+}
+func Infof(format string, args ...interface{}) {
+	log.Infof(format, args...)
+}
+
+func Warn(args ...interface{}) {
+	log.Warn(args...)
+}
+func Warnf(format string, args ...interface{}) {
+	log.Warnf(format, args...)
+}
+
+func Error(args ...interface{}) {
+	log.Error(args...)
+}
+func Errorf(format string, args ...interface{}) {
+	log.Errorf(format, args...)
+}
+
+func Fatal(args ...interface{}) {
+	log.Fatal(args...)
+}
+func Fatalf(format string, args ...interface{}) {
+	log.Fatalf(format, args...)
+}
+
+func Panic(args ...interface{}) {
+	log.Fatal(args...)
+}
+func Panicf(format string, args ...interface{}) {
+	log.Fatalf(format, args...)
+}
+
+func LogFunction() {
 	pc := make([]uintptr, 10)
 	runtime.Callers(2, pc)
 	f := runtime.FuncForPC(pc[0])
 	_, line := f.FileLine(pc[0])
-	return fmt.Sprintf("Invoke at %s.%d", f.Name(), line)
+	log.Tracef("Invoke at %s.%d", f.Name(), line)
 }
