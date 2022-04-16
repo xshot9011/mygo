@@ -1,22 +1,25 @@
 package logger
 
 import (
+	"fmt"
 	"os"
+	"runtime"
 
-	log "github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 )
 
-func InitLogConfiguration() {
+func NewLogConfiguration() *logrus.Logger {
+	log := logrus.New()
 	log.SetOutput(os.Stdout)
 
-	logLevel, err := log.ParseLevel(os.Getenv("LOG_LEVEL"))
-	if err != nil {
-		logLevel = log.InfoLevel
-	}
-	customFormatter := new(log.TextFormatter)
+	customFormatter := new(logrus.TextFormatter)
 	customFormatter.TimestampFormat = "2006-01-02T15:04:05+0000"
 	customFormatter.FullTimestamp = true
 
+	logLevel, err := logrus.ParseLevel(os.Getenv("LOG_LEVEL"))
+	if err != nil {
+		logLevel = logrus.InfoLevel
+	}
 	log.SetFormatter(customFormatter)
 	log.SetLevel(logLevel)
 
@@ -28,4 +31,13 @@ func InitLogConfiguration() {
 	log.Error("Successfully initial log Error")
 	// log.Fatal("Bye.")         // Calls os.Exit(1) after logging
 	// log.Panic("I'm bailing.") // Calls panic() after logging
+	return log
+}
+
+func Trace() string {
+	pc := make([]uintptr, 10)
+	runtime.Callers(2, pc)
+	f := runtime.FuncForPC(pc[0])
+	_, line := f.FileLine(pc[0])
+	return fmt.Sprintf("%s.%d", f.Name(), line)
 }
