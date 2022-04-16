@@ -25,20 +25,12 @@ func init() {
 	}
 	log.SetFormatter(customFormatter)
 	log.SetLevel(logLevel)
-
-	// The log level is the hierarchy.
-	// log.Trace("Successfully initial log Trace")
-	// log.Debug("Successfully initial log Debug")
-	// log.Info("Successfully initial log Info")
-	// log.Warn("Successfully initial log Warn")
-	// log.Error("Successfully initial log Error")
-	// log.Fatal("Bye.")         // Calls os.Exit(1) after logging
-	// log.Panic("I'm bailing.") // Calls panic() after logging
 }
 
 func Trace(args ...interface{}) {
 	log.Trace(args...)
 }
+
 func Tracef(format string, args ...interface{}) {
 	log.Tracef(format, args...)
 }
@@ -46,6 +38,7 @@ func Tracef(format string, args ...interface{}) {
 func Debug(args ...interface{}) {
 	log.Debug(args...)
 }
+
 func Debugf(format string, args ...interface{}) {
 	log.Debugf(format, args...)
 }
@@ -53,6 +46,7 @@ func Debugf(format string, args ...interface{}) {
 func Info(args ...interface{}) {
 	log.Info(args...)
 }
+
 func Infof(format string, args ...interface{}) {
 	log.Infof(format, args...)
 }
@@ -60,6 +54,7 @@ func Infof(format string, args ...interface{}) {
 func Warn(args ...interface{}) {
 	log.Warn(args...)
 }
+
 func Warnf(format string, args ...interface{}) {
 	log.Warnf(format, args...)
 }
@@ -67,6 +62,7 @@ func Warnf(format string, args ...interface{}) {
 func Error(args ...interface{}) {
 	log.Error(args...)
 }
+
 func Errorf(format string, args ...interface{}) {
 	log.Errorf(format, args...)
 }
@@ -74,15 +70,16 @@ func Errorf(format string, args ...interface{}) {
 func Fatal(args ...interface{}) {
 	log.Fatal(args...)
 }
+
 func Fatalf(format string, args ...interface{}) {
 	log.Fatalf(format, args...)
 }
 
 func Panic(args ...interface{}) {
-	log.Fatal(args...)
+	log.Panic(args...)
 }
 func Panicf(format string, args ...interface{}) {
-	log.Fatalf(format, args...)
+	log.Panicf(format, args...)
 }
 
 func LogFunction() {
