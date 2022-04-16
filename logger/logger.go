@@ -8,8 +8,12 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func NewLogConfiguration() *logrus.Logger {
-	log := logrus.New()
+var (
+	log *logrus.Logger
+)
+
+func init() {
+	log = logrus.New()
 	log.SetOutput(os.Stdout)
 
 	customFormatter := new(logrus.TextFormatter)
@@ -31,7 +35,6 @@ func NewLogConfiguration() *logrus.Logger {
 	// log.Error("Successfully initial log Error")
 	// log.Fatal("Bye.")         // Calls os.Exit(1) after logging
 	// log.Panic("I'm bailing.") // Calls panic() after logging
-	return log
 }
 
 func Trace() string {
@@ -39,5 +42,5 @@ func Trace() string {
 	runtime.Callers(2, pc)
 	f := runtime.FuncForPC(pc[0])
 	_, line := f.FileLine(pc[0])
-	return fmt.Sprintf("%s.%d", f.Name(), line)
+	return fmt.Sprintf("Invoke at %s.%d", f.Name(), line)
 }
